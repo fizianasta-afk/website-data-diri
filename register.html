@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Register Data Diri</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,42 +16,232 @@
 
     <h1>📝 Register Data Diri</h1>
 
-    <input id="nama" placeholder="Nama">
-    <input id="sekolah" placeholder="Sekolah">
-    <input id="umur" type="number" placeholder="Umur">
-    <input id="cita" placeholder="Cita-cita">
-    <input id="hobi" placeholder="Hobi">
+    <p>Isi data diri dan buat PIN pribadi.</p>
 
-    <button class="button" onclick="simpanData()">
-        💾 Simpan Data
+    <!-- NAMA -->
+
+    <input
+        id="nama"
+        type="text"
+        placeholder="Nama"
+    >
+
+    <!-- SEKOLAH -->
+
+    <input
+        id="sekolah"
+        type="text"
+        placeholder="Sekolah"
+    >
+
+    <!-- UMUR -->
+
+    <input
+        id="umur"
+        type="number"
+        placeholder="Umur"
+    >
+
+    <!-- CITA-CITA -->
+
+    <input
+        id="cita"
+        type="text"
+        placeholder="Cita-cita"
+    >
+
+    <!-- HOBI -->
+
+    <input
+        id="hobi"
+        type="text"
+        placeholder="Hobi"
+    >
+
+    <br>
+
+    <h2>🔐 Buat PIN</h2>
+
+    <p>
+        PIN digunakan untuk masuk ke jadwal
+        dan mengedit jadwal.
+    </p>
+
+    <!-- PIN -->
+
+    <input
+        id="pin"
+        type="password"
+        inputmode="numeric"
+        maxlength="6"
+        placeholder="Buat PIN 6 digit"
+    >
+
+    <!-- KONFIRMASI PIN -->
+
+    <input
+        id="konfirmasiPin"
+        type="password"
+        inputmode="numeric"
+        maxlength="6"
+        placeholder="Ulangi PIN"
+    >
+
+    <!-- TOMBOL -->
+
+    <button
+        class="button"
+        onclick="simpanData()"
+    >
+        💾 DAFTAR
     </button>
 
-    <a href="index.html" class="button">
+    <a
+        href="index.html"
+        class="button"
+    >
         🏠 Kembali
     </a>
 
 </div>
 
+
 <script>
 
 function simpanData() {
 
+    // Mengambil data
+
+    const nama =
+        document.getElementById("nama").value.trim();
+
+    const sekolah =
+        document.getElementById("sekolah").value.trim();
+
+    const umur =
+        document.getElementById("umur").value.trim();
+
+    const cita =
+        document.getElementById("cita").value.trim();
+
+    const hobi =
+        document.getElementById("hobi").value.trim();
+
+    const pin =
+        document.getElementById("pin").value.trim();
+
+    const konfirmasiPin =
+        document.getElementById("konfirmasiPin").value.trim();
+
+
+    // Memeriksa data diri
+
+    if (
+        nama === "" ||
+        sekolah === "" ||
+        umur === "" ||
+        cita === "" ||
+        hobi === ""
+    ) {
+
+        alert("⚠️ Semua data diri harus diisi!");
+
+        return;
+    }
+
+
+    // Memeriksa PIN
+
+    if (pin === "") {
+
+        alert("⚠️ Silakan buat PIN terlebih dahulu!");
+
+        return;
+    }
+
+
+    // PIN harus 6 digit
+
+    if (!/^[0-9]{6}$/.test(pin)) {
+
+        alert("⚠️ PIN harus terdiri dari 6 angka!");
+
+        return;
+    }
+
+
+    // Memeriksa konfirmasi PIN
+
+    if (pin !== konfirmasiPin) {
+
+        alert("❌ PIN dan konfirmasi PIN tidak sama!");
+
+        return;
+    }
+
+
+    // Membuat data pengguna
+
     const data = {
-        nama: document.getElementById("nama").value,
-        sekolah: document.getElementById("sekolah").value,
-        umur: document.getElementById("umur").value,
-        cita: document.getElementById("cita").value,
-        hobi: document.getElementById("hobi").value
+
+        nama: nama,
+
+        sekolah: sekolah,
+
+        umur: umur,
+
+        cita: cita,
+
+        hobi: hobi,
+
+        pin: pin
+
     };
 
-    localStorage.setItem("dataDiri", JSON.stringify(data));
 
-    alert("Data berhasil disimpan!");
+    // Menyimpan data
+
+    localStorage.setItem(
+        "dataDiri",
+        JSON.stringify(data)
+    );
+
+
+    // Membuat jadwal kosong
+
+    const jadwalKosong = {
+
+        Senin: [],
+
+        Selasa: [],
+
+        Rabu: [],
+
+        Kamis: [],
+
+        Jumat: [],
+
+        Sabtu: []
+
+    };
+
+
+    localStorage.setItem(
+        "jadwalSekolah",
+        JSON.stringify(jadwalKosong)
+    );
+
+
+    alert("✅ Pendaftaran berhasil!");
+
+    // Masuk ke profil
 
     window.location.href = "profil.html";
+
 }
 
 </script>
 
 </body>
+
 </html>
