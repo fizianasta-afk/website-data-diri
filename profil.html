@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Saya</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>👤 Profil Saya</h1>
+
+    <div id="profil"></div>
+
+    <a href="karya.html" class="button">
+        🎨 Hasil Karya
+    </a>
+
+    <a href="register.html" class="button">
+        ✏️ Edit Data
+    </a>
+
+    <a href="index.html" class="button">
+        🏠 Beranda
+    </a>
+
+</div>
+
+<script>
+
+const data = JSON.parse(localStorage.getItem("dataDiri"));
+
+if (data) {
+
+    document.getElementById("profil").innerHTML = `
+        <p><strong>Nama:</strong> ${data.nama}</p>
+        <p><strong>Sekolah:</strong> ${data.sekolah}</p>
+        <p><strong>Umur:</strong> ${data.umur} tahun</p>
+        <p><strong>Cita-cita:</strong> ${data.cita}</p>
+        <p><strong>Hobi:</strong> ${data.hobi}</p>
+    `;
+
+} else {
+
+    document.getElementById("profil").innerHTML =
+        "<p>Belum ada data. Silakan register terlebih dahulu.</p>";
+
+}
+
+</script>
+
+</body>
+</html>
