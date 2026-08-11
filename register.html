@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Data Diri</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📝 Register Data Diri</h1>
+
+    <input id="nama" placeholder="Nama">
+    <input id="sekolah" placeholder="Sekolah">
+    <input id="umur" type="number" placeholder="Umur">
+    <input id="cita" placeholder="Cita-cita">
+    <input id="hobi" placeholder="Hobi">
+
+    <button class="button" onclick="simpanData()">
+        💾 Simpan Data
+    </button>
+
+    <a href="index.html" class="button">
+        🏠 Kembali
+    </a>
+
+</div>
+
+<script>
+
+function simpanData() {
+
+    const data = {
+        nama: document.getElementById("nama").value,
+        sekolah: document.getElementById("sekolah").value,
+        umur: document.getElementById("umur").value,
+        cita: document.getElementById("cita").value,
+        hobi: document.getElementById("hobi").value
+    };
+
+    localStorage.setItem("dataDiri", JSON.stringify(data));
+
+    alert("Data berhasil disimpan!");
+
+    window.location.href = "profil.html";
+}
+
+</script>
+
+</body>
+</html>
