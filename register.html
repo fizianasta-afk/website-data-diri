@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +7,42 @@
     <title>Register Data Diri</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .pin-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f0f2ff;
+            border-radius: 15px;
+            border: 2px solid #667eea;
+        }
+
+        .pin-box h2 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        .pin-info {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .pin-input {
+            width: 100%;
+            padding: 15px;
+            margin: 8px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 5px;
+        }
+
+        .pin-input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,9 +51,7 @@
 
     <h1>📝 Register Data Diri</h1>
 
-    <p>Isi data diri dan buat PIN pribadi.</p>
-
-    <!-- NAMA -->
+    <p>Silakan isi data diri kamu.</p>
 
     <input
         id="nama"
@@ -26,15 +59,11 @@
         placeholder="Nama"
     >
 
-    <!-- SEKOLAH -->
-
     <input
         id="sekolah"
         type="text"
         placeholder="Sekolah"
     >
-
-    <!-- UMUR -->
 
     <input
         id="umur"
@@ -42,15 +71,11 @@
         placeholder="Umur"
     >
 
-    <!-- CITA-CITA -->
-
     <input
         id="cita"
         type="text"
         placeholder="Cita-cita"
     >
-
-    <!-- HOBI -->
 
     <input
         id="hobi"
@@ -58,36 +83,40 @@
         placeholder="Hobi"
     >
 
-    <br>
-
-    <h2>🔐 Buat PIN</h2>
-
-    <p>
-        PIN digunakan untuk masuk ke jadwal
-        dan mengedit jadwal.
-    </p>
 
     <!-- PIN -->
 
-    <input
-        id="pin"
-        type="password"
-        inputmode="numeric"
-        maxlength="6"
-        placeholder="Buat PIN 6 digit"
-    >
+    <div class="pin-box">
 
-    <!-- KONFIRMASI PIN -->
+        <h2>🔐 Buat PIN Pribadi</h2>
 
-    <input
-        id="konfirmasiPin"
-        type="password"
-        inputmode="numeric"
-        maxlength="6"
-        placeholder="Ulangi PIN"
-    >
+        <p class="pin-info">
+            PIN ini digunakan untuk masuk ke
+            <strong>Jadwal Pelajaran</strong>
+            dan
+            <strong>Edit Jadwal</strong>.
+        </p>
 
-    <!-- TOMBOL -->
+        <input
+            id="pin"
+            class="pin-input"
+            type="password"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="6 DIGIT"
+        >
+
+        <input
+            id="konfirmasiPin"
+            class="pin-input"
+            type="password"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="ULANGI PIN"
+        >
+
+    </div>
+
 
     <button
         class="button"
@@ -100,7 +129,7 @@
         href="index.html"
         class="button"
     >
-        🏠 Kembali
+        🏠 KEMBALI
     </a>
 
 </div>
@@ -109,8 +138,6 @@
 <script>
 
 function simpanData() {
-
-    // Mengambil data
 
     const nama =
         document.getElementById("nama").value.trim();
@@ -134,8 +161,6 @@ function simpanData() {
         document.getElementById("konfirmasiPin").value.trim();
 
 
-    // Memeriksa data diri
-
     if (
         nama === "" ||
         sekolah === "" ||
@@ -150,56 +175,33 @@ function simpanData() {
     }
 
 
-    // Memeriksa PIN
-
-    if (pin === "") {
-
-        alert("⚠️ Silakan buat PIN terlebih dahulu!");
-
-        return;
-    }
-
-
-    // PIN harus 6 digit
-
     if (!/^[0-9]{6}$/.test(pin)) {
 
-        alert("⚠️ PIN harus terdiri dari 6 angka!");
+        alert("⚠️ PIN harus tepat 6 angka!");
 
         return;
     }
 
-
-    // Memeriksa konfirmasi PIN
 
     if (pin !== konfirmasiPin) {
 
-        alert("❌ PIN dan konfirmasi PIN tidak sama!");
+        alert("❌ Konfirmasi PIN tidak cocok!");
 
         return;
     }
 
-
-    // Membuat data pengguna
 
     const data = {
 
         nama: nama,
-
         sekolah: sekolah,
-
         umur: umur,
-
         cita: cita,
-
         hobi: hobi,
-
         pin: pin
 
     };
 
-
-    // Menyimpan data
 
     localStorage.setItem(
         "dataDiri",
@@ -207,20 +209,13 @@ function simpanData() {
     );
 
 
-    // Membuat jadwal kosong
-
     const jadwalKosong = {
 
         Senin: [],
-
         Selasa: [],
-
         Rabu: [],
-
         Kamis: [],
-
         Jumat: [],
-
         Sabtu: []
 
     };
@@ -232,9 +227,8 @@ function simpanData() {
     );
 
 
-    alert("✅ Pendaftaran berhasil!");
+    alert("✅ Data berhasil disimpan!");
 
-    // Masuk ke profil
 
     window.location.href = "profil.html";
 
@@ -243,5 +237,4 @@ function simpanData() {
 </script>
 
 </body>
-
 </html>
